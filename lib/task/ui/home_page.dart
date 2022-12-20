@@ -21,9 +21,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Orocorp'),centerTitle: true,),
-      body: _buildList(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Orocorp'),centerTitle: true,),
+        body: _buildList(),
+      ),
     );
   }
 

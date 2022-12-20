@@ -1,9 +1,8 @@
-import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 
+import '../../repository/api_repo_impl.dart';
 import '../../repository/api_repository.dart';
 import '../model/task_model.dart';
 
@@ -12,12 +11,12 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitial()) {
-    final ApiRepository _apiRepository = ApiRepository();
+    final ApiRepositoryImpl apiRepository = ApiRepositoryImpl();
 
     on<callTaskEvent>((event, emit) async {
       try {
         emit(TaskLoading());
-        final mList = await _apiRepository.fetchList();
+        final mList = await apiRepository.fetchList();
         emit(TaskLoaded(response: mList));
         if (mList.error != null) {
           emit(TaskError(message:mList.error));

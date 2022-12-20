@@ -8,9 +8,10 @@ class ApiProvider {
 
   Future<TaskModel> fetchList() async {
     try {
-      Timer(Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 2), () {
       });
       Response response = await _dio.get(_url);
+      print(response);
       return TaskModel.fromJson(response.data);
     } catch (error, stacktrace) {
       return TaskModel.withError("Connection issue");
